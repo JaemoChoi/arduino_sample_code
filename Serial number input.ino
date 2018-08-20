@@ -1,16 +1,21 @@
-char input_buffer;
-int value;
+char buffer[20]; 
+char bufferIndex = 0; 
 
 void setup(){
-Serial.begin(9600);
+  Serial.begin(9600);
 }
 
 void loop(){
     while(Serial.available()){
-    input_buffer = Serail.read();
-    value = atoi(input_buffer);         //convert char to int
+        buffer[bufferIndex] = Serial.read();
+        bufferIndex++;
+    }
+    int data = atoi(buffer);
     Serial.print(" Input Data : ");
-    Serial.println(value);
+    Serial.println(data);
     
-  }
+    for (int i = 0 i < 21 ; i++){
+        buffer[i] = NULL;
+    }
+    bufferIndex = 0;
 }
