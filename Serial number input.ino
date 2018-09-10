@@ -14,7 +14,7 @@ void loop(){
     Serial.print(" Input Data : ");
     Serial.println(data);
     
-    for (int i = 0 i < 21 ; i++){
+    for (int i = 0; i < 21 ; i++){
         buffer[i] = NULL;
     }
     bufferIndex = 0;
