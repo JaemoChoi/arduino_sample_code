@@ -30,6 +30,11 @@ void playVideo(String path) {
     // VLC 실행 (경로 수정 필요)
     String vlcPath = "C:/Program Files/VideoLAN/VLC/vlc.exe";
     Process p = Runtime.getRuntime().exec("\"" + vlcPath + "\" \"" + path + "\"");
+
+// windows player //
+Runtime.getRuntime().exec("cmd /c start \"\" \"C:/videos/movie1.mp4\"");
+
+
   } catch (IOException e) {
     println("에러: " + e.getMessage());
   }
