@@ -36,28 +36,33 @@ def play_on_monitor(video_path, x, y, width, height):
    
     subprocess.Popen(cmd)
 
+ffplay_processes = []
+
 def play_with_ffplay(video_path, left, top, width, height, mute=False):
     cmd = [
         FFPLAY_PATH,
         video_path,
         "-noborder",
-        "-fs",  # 전체화면 옵션 추가
+        "-fs",
         "-x", str(width),
         "-y", str(height),
         "-left", str(left),
         "-top", str(top)
     ]
     if mute:
-        cmd.append("-an")  # 오디오 비활성화
-    subprocess.Popen(cmd)
+        cmd.append("-an")
+    proc = subprocess.Popen(cmd)
+    ffplay_processes.append(proc)
 
 def kill_ffplay():
-    # 모든 ffplay.exe 프로세스 종료
-    os.system("taskkill /f /im ffplay.exe")
-
-def kill_vlc():
-    # 모든 vlc.exe 프로세스 종료
-    os.system("taskkill /f /im vlc.exe")
+    # 실행 중인 ffplay 프로세스 직접 종료
+    global ffplay_processes
+    for proc in ffplay_processes:
+        try:
+            proc.terminate()
+        except Exception:
+            pass
+    ffplay_processes = []
 
 # 시리얼 연결
 ser = serial.Serial(PORT, BAUDRATE)
@@ -72,12 +77,11 @@ while True:
         line = ser.readline().decode('utf-8').strip()
         print(f"받은 데이터: {line}")
         kill_ffplay()
-        kill_vlc()
         if line.lower() == "1":
             print("▶ play 실행: 1_1.mp4 + 2_1.mp4")
-            play_with_ffplay(VIDEO_MONITOR1_1, 0, 0, 2880, 1800)
-            play_with_ffplay(VIDEO_MONITOR2_1, 2880, 0, 3440, 1440)
+            play_with_ffplay(VIDEO_MONITOR1_1, 0, 0, 2880, 1800,mute=True)
+            play_with_ffplay(VIDEO_MONITOR2_1, 2880, 0, 3440, 1440, mute=False)
         elif line.lower() == "2":
             print("▶ play 실행: 1_2.mp4 + 2_2.mp4")
-            play_with_ffplay(VIDEO_MONITOR1_2, 0, 0, 2880, 1800)
-            play_with_ffplay(VIDEO_MONITOR2_2, 2880, 0, 3440, 1440)
+            play_with_ffplay(VIDEO_MONITOR1_2, 0, 0, 2880, 1800, mute=True)
+            play_with_ffplay(VIDEO_MONITOR2_2, 2880, 0, 3440, 1440, mute=False)
