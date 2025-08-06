@@ -38,7 +38,7 @@ def play_on_monitor(video_path, x, y, width, height):
 
 ffplay_processes = []
 
-def play_with_ffplay(video_path, left, top, width, height, mute=False):
+def play_with_ffplay(video_path, left, top, width, height, mute=False, rotate=0):
     cmd = [
         FFPLAY_PATH,
         video_path,
@@ -51,6 +51,15 @@ def play_with_ffplay(video_path, left, top, width, height, mute=False):
     ]
     if mute:
         cmd.append("-an")
+    if rotate == 90:
+        cmd.append("-vf")
+        cmd.append("transpose=1")  # 90도 회전
+    elif rotate == 180:
+        cmd.append("-vf")
+        cmd.append("transpose=2,transpose=2")  # 180도 회전
+    elif rotate == 270:
+        cmd.append("-vf")
+        cmd.append("transpose=2")  # 270도 회전
     proc = subprocess.Popen(cmd)
     ffplay_processes.append(proc)
 
@@ -79,9 +88,9 @@ while True:
         kill_ffplay()
         if line.lower() == "1":
             print("▶ play 실행: 1_1.mp4 + 2_1.mp4")
-            play_with_ffplay(VIDEO_MONITOR1_1, 0, 0, 2880, 1800,mute=True)
+            play_with_ffplay(VIDEO_MONITOR1_1, 0, 0, 2880, 1800,mute=True,rotate=90)
             play_with_ffplay(VIDEO_MONITOR2_1, 2880, 0, 3440, 1440, mute=False)
         elif line.lower() == "2":
             print("▶ play 실행: 1_2.mp4 + 2_2.mp4")
-            play_with_ffplay(VIDEO_MONITOR1_2, 0, 0, 2880, 1800, mute=True)
+            play_with_ffplay(VIDEO_MONITOR1_2, 0, 0, 2880, 1800, mute=True, rotate=90)
             play_with_ffplay(VIDEO_MONITOR2_2, 2880, 0, 3440, 1440, mute=False)
