@@ -1,11 +1,28 @@
-#define Back_Light_Right1       4
-#define Back_Light_Right2       5
-#define Back_Light_Right34      6
-#define Back_Light_Right5       7
-#define Back_Light_RightTop     8
+#define BLR1       4
+#define BLR2       5
+#define BLR3       6
+#define BLR4       7
+#define BLRT       8
 
-#define Back_Light_Left1        9
-#define Back_Light_Left2        10
-#define Back_Light_Left34       11
-#define Back_Light_Left5        12
-#define Back_Light_LeftTop      13
+#define BLL1       9
+#define BLL2      10
+#define BLL3      11
+#define BLL4      12
+#define BLLT      13
+
+#define SLD1      22
+#define SLD2      23
+#define SLD3      24
+#define SLB1      25
+#define SLB2      26
+#define SLB3      27
+#define SLB4      28
+
+#define SRD1      29
+#define SRD2      30
+#define SRD3      31
+#define SRB1      32
+#define SRB2      33
+#define SRB3      34
+#define SRB4      35
+
