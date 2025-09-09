@@ -1,5 +1,5 @@
 
-/* DA Open Fridge Main Controller */
+/* DA AI Stage Main Controller */
 #include <Adafruit_NeoPixel.h>
 #include "PIN_define.h"
 
