@@ -35,7 +35,7 @@ def load_serial_config(config_file):
         print(f"설정 파일 로드 실패: {e}")
     return config
 
-def play_video_on_dual_monitor(video_path, width, height, left, top, loop=False):
+def play_video_on_dual_monitor(video_path, width, height, left, top, loop=False, rotate=0):
     global current_process, is_paused
 
     # 기존 재생 중인 프로세스가 있으면 종료
@@ -58,11 +58,20 @@ def play_video_on_dual_monitor(video_path, width, height, left, top, loop=False)
     ]
     if loop:
         cmd.extend(["-loop", "0"])  # 무한 반복 옵션 추가
+
+    # 회전 옵션 추가
+    if rotate == 90:
+        cmd.extend(["-vf", "transpose=1"])  # 시계 방향 90도 회전
+    elif rotate == 180:
+        cmd.extend(["-vf", "transpose=2,transpose=2"])  # 180도 회전
+    elif rotate == 270:
+        cmd.extend(["-vf", "transpose=2"])  # 반시계 방향 90도 회전
+
     cmd.append(video_path)
 
     try:
         current_process = subprocess.Popen(cmd)  # 새로운 프로세스 실행
-        print(f"동영상 재생 시작: {video_path} (loop={'ON' if loop else 'OFF'})")
+        print(f"동영상 재생 시작: {video_path} (loop={'ON' if loop else 'OFF'}, rotate={rotate}°)")
     except Exception as e:
         print(f"동영상 재생 실패: {e}")
 
