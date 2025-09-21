@@ -3,42 +3,42 @@
 #define PIN 6
 #define NUMPIXELS 50
 
-Adafruit_NeoPixel strip(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+// GRBW 네오픽셀 지정
+Adafruit_NeoPixel strip(NUMPIXELS, PIN, NEO_GRBW + NEO_KHZ800);
 
-// 숨쉬기 효과 함수
-void breathe(uint32_t color, int cycles) {
-  uint8_t baseR = (color >> 16) & 0xFF;
-  uint8_t baseG = (color >> 8) & 0xFF;
-  uint8_t baseB = (color) & 0xFF;
-
+// 숨쉬기 효과 함수 (RGBW)
+void breathe(uint8_t r, uint8_t g, uint8_t b, uint8_t w, int cycles) {
   for (int c = 0; c < cycles; c++) {
     // 밝아짐
-    for (int b = 0; b <= 255; b++) {
+    for (int bri = 0; bri <= 255; bri++) {
       strip.clear();
       for (int i = 0; i < NUMPIXELS; i++) {
-        uint8_t r = (baseR * b) / 255;
-        uint8_t g = (baseG * b) / 255;
-        uint8_t bl = (baseB * b) / 255;
-        strip.setPixelColor(i, strip.Color(r, g, bl));
+        uint8_t rr = (r * bri) / 255;
+        uint8_t gg = (g * bri) / 255;
+        uint8_t bb = (b * bri) / 255;
+        uint8_t ww = (w * bri) / 255;
+        strip.setPixelColor(i, strip.Color(rr, gg, bb, ww));
       }
       strip.show();
-      delay(5); // 속도 조절 (커질수록 느려짐)
+      delay(5); // 속도 조절
     }
+
     // 어두워짐
-    for (int b = 255; b >= 0; b--) {
+    for (int bri = 255; bri >= 0; bri--) {
       strip.clear();
       for (int i = 0; i < NUMPIXELS; i++) {
-        uint8_t r = (baseR * b) / 255;
-        uint8_t g = (baseG * b) / 255;
-        uint8_t bl = (baseB * b) / 255;
-        strip.setPixelColor(i, strip.Color(r, g, bl));
+        uint8_t rr = (r * bri) / 255;
+        uint8_t gg = (g * bri) / 255;
+        uint8_t bb = (b * bri) / 255;
+        uint8_t ww = (w * bri) / 255;
+        strip.setPixelColor(i, strip.Color(rr, gg, bb, ww));
       }
       strip.show();
       delay(5);
     }
   }
 
-  // 다 끝나면 꺼짐
+  // 끝나면 꺼짐
   strip.clear();
   strip.show();
 }
@@ -47,10 +47,13 @@ void setup() {
   strip.begin();
   strip.show();
 
-  // 예: 파란색 숨쉬기 효과 3번 실행
-  breathe(strip.Color(0, 0, 255), 3);
+  // 예: 하얀색 숨쉬기 효과 3번 실행
+  breathe(0, 0, 0, 255, 3);
+
+  // 예: 보라색(R+B+W) 숨쉬기 효과 2번 실행
+  // breathe(255, 0, 255, 100, 2);
 }
 
 void loop() {
-  // 아무것도 안 함
+  // 빈 루프
 }
