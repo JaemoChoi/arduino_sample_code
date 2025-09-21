@@ -11,62 +11,50 @@ uint32_t color2 = strip.Color(0, 0, 255);   // 파랑
 
 // 효과 파라미터
 int groupSize = 6;
-float speed = 0.1;   // 이동 속도
+float speed = 0.1;   // 이동 속도 (작으면 느려짐)
+int frameDelay = 10; // ms 단위 프레임 간격
 
+// listen 효과 함수 (count번 실행 후 종료)
 void listen(int count) {
-  static float pos = 0;               // 현재 위치
-  static int cycleCount = 0;          // 완료한 사이클 수
-  static unsigned long lastUpdate = 0;
-  static int targetCycles = 0;
-  static bool running = false;
+  float pos = 0;
 
-  // 최초 호출 시 count로 초기화
-  if (!running) {
-    pos = 0;
-    cycleCount = 0;
-    targetCycles = count;
-    running = true;
+  for (int cycle = 0; cycle < count; cycle++) {
+    while (pos < NUMPIXELS - groupSize) {
+      strip.clear();
+
+      // 6픽셀 묶음 출력
+      for (int i = 0; i < groupSize; i++) {
+        int idx = (int)(pos + i);
+        if (idx >= 0 && idx < NUMPIXELS) {
+          float ratio = (float)i / (groupSize - 1);
+          uint8_t r = (uint8_t)((1 - ratio) * ((color1 >> 16) & 0xFF) + ratio * ((color2 >> 16) & 0xFF));
+          uint8_t g = (uint8_t)((1 - ratio) * ((color1 >> 8) & 0xFF) + ratio * ((color2 >> 8) & 0xFF));
+          uint8_t b = (uint8_t)((1 - ratio) * ((color1) & 0xFF) + ratio * ((color2) & 0xFF));
+
+          strip.setPixelColor(idx, strip.Color(r, g, b));
+        }
+      }
+
+      strip.show();
+      delay(frameDelay);
+      pos += speed;
+    }
+    pos = 0; // 한 사이클 끝 → 다시 처음으로
   }
 
-  unsigned long now = millis();
-  if (running && now - lastUpdate > 10) {
-    lastUpdate = now;
-    strip.clear();
-
-    // 6픽셀 묶음 출력
-    for (int i = 0; i < groupSize; i++) {
-      int idx = (int)(pos + i);
-      if (idx >= 0 && idx < NUMPIXELS) {
-        float ratio = (float)i / (groupSize - 1);
-        uint8_t r = (uint8_t)((1 - ratio) * ((color1 >> 16) & 0xFF) + ratio * ((color2 >> 16) & 0xFF));
-        uint8_t g = (uint8_t)((1 - ratio) * ((color1 >> 8) & 0xFF) + ratio * ((color2 >> 8) & 0xFF));
-        uint8_t b = (uint8_t)((1 - ratio) * ((color1) & 0xFF) + ratio * ((color2) & 0xFF));
-
-        strip.setPixelColor(idx, strip.Color(r, g, b));
-      }
-    }
-
-    strip.show();
-
-    // 위치 업데이트
-    pos += speed;
-    if (pos >= NUMPIXELS - groupSize) {
-      pos = 0;           // 다시 처음으로
-      cycleCount++;      // 사이클 완료
-      if (cycleCount >= targetCycles) {
-        running = false; // 실행 종료
-        strip.clear();
-        strip.show();
-      }
-    }
-  }
+  // 다 끝나면 꺼줌
+  strip.clear();
+  strip.show();
 }
 
 void setup() {
   strip.begin();
   strip.show();
+
+  // listen 효과를 3번 실행하고 끝냄
+  listen(3);
 }
 
 void loop() {
-  listen(5); // listen 효과를 5번만 실행
+  // 아무것도 안 함
 }
