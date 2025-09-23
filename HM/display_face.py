@@ -143,12 +143,19 @@ try:
                 play_with_ffplay(VIDEO_MONITOR1[2], 0, 0, 2560, 1660, mute=False, rotate=0)
             elif line.lower() == "3":
                 #print("▶ play 실행: 1_2.mp4 + 2_2.mp4")
-                play_with_ffplay(VIDEO_MONITOR1[3], 0, 0, 2560, 1660, mute=False, rotate=0)
-               
+                play_with_ffplay(VIDEO_MONITOR1[3], 0, 0, 2560, 1660, mute=False, rotate=0) 
             elif line.lower() == "4":
                 #print("▶ play 실행: 1_2.mp4 + 2_2.mp4")
                 play_with_ffplay(VIDEO_MONITOR1[4], 0, 0, 2560, 1660, mute=False, rotate=0)
-               
+            elif line.lower() == "5":
+                #print("▶ play 실행: 1_2.mp4 + 2_2.mp4")
+                play_with_ffplay(VIDEO_MONITOR1[5], 0, 0, 2560, 1660, mute=False, rotate=0)
+            elif line.lower() == "6":
+                #print("▶ play 실행: 1_2.mp4 + 2_2.mp4")
+                play_with_ffplay(VIDEO_MONITOR1[6], 0, 0, 2560, 1660, mute=False, rotate=0)
+            elif line.lower() == "7":
+                #print("▶ play 실행: 1_2.mp4 + 2_2.mp4")
+                play_with_ffplay(VIDEO_MONITOR1[7], 0, 0, 2560, 1660, mute=False, rotate=0)
 
 finally:
     # 프로그램 종료 시 작업 표시줄 다시 표시
