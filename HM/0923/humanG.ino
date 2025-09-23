@@ -28,8 +28,8 @@ int led_flag = 0;
 
 // 효과 파라미터
 int groupSize = 6;
-float speed = 0.4;    // 이동 속도 (작으면 느려짐)
-int frameDelay = 20;  // ms 단위 프레임 간격
+float speed = 0.5;    // 이동 속도 (작으면 느려짐)
+int frameDelay = 15;  // ms 단위 프레임 간격
 
 // listen 효과 함수 (count번 실행 후 종료)
 
@@ -66,13 +66,56 @@ void loop() {
     SCENE_NO = 255;
   }
 
-    if (SCENE_NO == 4) {
+  if (SCENE_NO == 4) {
     Serial.println(SCENE_NO);
     //EAR_setAll(0, 0, 0, 100);
     SHOULDER_setAllOFF(0, 0, 0, 150, 20);
     HAND_setAllOFF(0, 0, 0, 150, 20);
     FOOT_setAllOFF(0, 0, 0, 150, 20);
     NECK_setAllOFF(0, 0, 0, 150, 20);
+    SCENE_NO = 255;
+  }
+
+  if (SCENE_NO == 21) {
+    Serial.println(SCENE_NO);
+    //EAR_setAll(0, 0, 0, 100);
+    listen(3);
+    breathe(0, 0, 0, 100, 3);
+    
+    SCENE_NO = 255;
+  }
+
+  if (SCENE_NO == 22) {
+    Serial.println(SCENE_NO);
+    SHOULDER_STATUS = 1 -SHOULDER_STATUS;
+    if (SHOULDER_STATUS == 1) SHOULDER_setAll(0, 0, 0, 150);
+    else if (SHOULDER_STATUS == 0) SHOULDER_setAllOFF(0, 0, 0, 150,-1);
+    
+    SCENE_NO = 255;
+  }
+
+  if (SCENE_NO == 23) {
+    Serial.println(SCENE_NO);
+     NECK_STATUS = 1 -NECK_STATUS;
+    if (NECK_STATUS == 1) NECK_setAll(0, 0, 0, 150);
+    else if (NECK_STATUS == 0) NECK_setAllOFF(0, 0, 0, 150,-1);
+    
+    SCENE_NO = 255;
+  }
+
+  if (SCENE_NO == 24) {
+    Serial.println(SCENE_NO);
+    HAND_STATUS = 1 -HAND_STATUS;
+    if (HAND_STATUS == 1) HAND_setAll(0, 0, 0, 150);
+    else if (HAND_STATUS == 0) HAND_setAllOFF(0, 0, 0, 150,-1);
+    SCENE_NO = 255;
+  }
+
+  if (SCENE_NO == 25) {
+    Serial.println(SCENE_NO);
+    FOOT_STATUS = 1 -FOOT_STATUS;
+    if (FOOT_STATUS == 1) FOOT_setAll(0, 0, 0, 150);
+    else if (FOOT_STATUS == 0) FOOT_setAllOFF(0, 0, 0, 150,-1);
     SCENE_NO = 255;
   }
 
