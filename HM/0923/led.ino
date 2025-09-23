@@ -74,7 +74,7 @@ void NECK_setAll(byte red, byte green, byte blue, byte white) {
 }
 
 
-void EAR_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
+void EAR_setAllOFF(byte red, byte green, byte blue, byte white, int dimmed) {
   for (float dim = 255 ; dim > dimmed ; dim--) {
     for (int i = 0; i < EAR_NUM; i++) {
       EAR_setPixel(i, red * (dim / 255), green * (dim / 255), blue * (dim / 255), white * (dim / 255));
@@ -83,7 +83,7 @@ void EAR_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
   }
 }
 
-void SHOULDER_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
+void SHOULDER_setAllOFF(byte red, byte green, byte blue, byte white, int dimmed) {
   for (float dim = 255 ; dim > dimmed ; dim--) {
     for (int i = 0; i < SHOULDER_NUM; i++) {
       SHOULDER_setPixel(i, red * (dim / 255), green * (dim / 255), blue * (dim / 255), white * (dim / 255));
@@ -93,7 +93,7 @@ void SHOULDER_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed
 }
 
 
-void HAND_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
+void HAND_setAllOFF(byte red, byte green, byte blue, byte white, int dimmed) {
   for (float dim = 255 ; dim > dimmed ; dim--) {
     for (int i = 0; i < HAND_NUM; i++) {
       HAND_setPixel(i, red * (dim / 255), green * (dim / 255), blue * (dim / 255), white * (dim / 255));
@@ -103,7 +103,7 @@ void HAND_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
 }
 
 
-void FOOT_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
+void FOOT_setAllOFF(byte red, byte green, byte blue, byte white, int dimmed) {
   for (float dim = 255 ; dim > dimmed ; dim--) {
     for (int i = 0; i < FOOT_NUM; i++) {
       FOOT_setPixel(i, red * (dim / 255), green * (dim / 255), blue * (dim / 255), white * (dim / 255));
@@ -113,7 +113,7 @@ void FOOT_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
 }
 
 
-void NECK_setAllOFF(byte red, byte green, byte blue, byte white, byte dimmed) {
+void NECK_setAllOFF(byte red, byte green, byte blue, byte white, int dimmed) {
   for (float dim = 255 ; dim > dimmed ; dim--) {
     for (int i = 0; i < NECK_NUM; i++) {
       NECK_setPixel(i, red * (dim / 255), green * (dim / 255), blue * (dim / 255), white * (dim / 255));
