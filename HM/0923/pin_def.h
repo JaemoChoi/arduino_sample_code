@@ -10,6 +10,9 @@
 #define FOOT_NUM        30
 #define NECK_NUM        30
 
-
-
+int EAR_STATUS = 0;
+int SHOULDER_STATUS = 0;
+int NECK_STATUS = 0;
+int HAND_STATUS = 0;
+int FOOT_STATUS = 0;
 
