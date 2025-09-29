@@ -160,8 +160,24 @@ try:
             stop_audio()  # 새로운 데이터가 들어오면 항상 오디오 중지
             if data == "99":  # Pause/Resume 토글 명령
                 toggle_pause_resume()
-            elif data in videos:  # 받은 데이터가 동영상 키에 해당하면
+            elif data.lower() == "1":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=True)
+            elif data.lower() == "2":
                 play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)
+            elif data.lower() == "3":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)
+            elif data.lower() == "4":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)
+            elif data.lower() == "5":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)
+            elif data.lower() == "6":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)
+            elif data.lower() == "7":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)
+            elif data.lower() == "8":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)
+            elif data.lower() == "9":
+                play_video_on_dual_monitor(videos[data], monitor_width, monitor_height, monitor_left, monitor_top, loop=False)         
             elif data in audios:  # 받은 데이터가 오디오 키에 해당하면
                 play_audio(audios[data])
             else:
