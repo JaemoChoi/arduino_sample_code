@@ -26,6 +26,10 @@ void setup() {
   EAR_strip.begin();
   EAR_strip.setBrightness(150);
   EAR_strip.show();
+
+  REAR_strip.begin();
+  REAR_strip.setBrightness(150);
+  REAR_strip.show();
 }
 
 void loop() {
