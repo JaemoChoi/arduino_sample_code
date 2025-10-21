@@ -66,9 +66,7 @@ void listen() {
   pos += speed;
   // Position initial.
   if (pos >= EAR_NUM) pos -= EAR_NUM;
-
-  EAR_strip.clear();
+  
   EAR_strip.show();
-  REAR_strip.clear();
   REAR_strip.show();
 }
